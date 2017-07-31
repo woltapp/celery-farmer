@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 
 class EventListener(threading.Thread):
-    def __init__(self, celery_app):
+    def __init__(self, celery_app, statsd_client):
         super(EventListener, self).__init__()
         self.daemon = True
 
@@ -18,7 +18,7 @@ class EventListener(threading.Thread):
         self.state = self.celery_app.events.State()
 
     def run(self):
-        logger.info("Running event listener")
+        logger.info("Running EventListener")
         try_interval = 1
         while True:
             try:

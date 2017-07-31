@@ -18,13 +18,14 @@ class EnableEvents(threading.Thread):
         self.is_terminated = False
 
     def stop(self):
+        logger.info("Stopping EnableEvents")
         self.is_terminated = True
 
     def run(self):
+        logger.info("Running EnableEvents")
         while not self.is_terminated:
             try:
                 self.celery_app.control.enable_events()
             finally:
                 poll_time = self.poll_time
-                logger.debug("Sleeping for %i seconds before enabling events again" % poll_time)
                 time.sleep(poll_time)
