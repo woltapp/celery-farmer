@@ -58,4 +58,32 @@ class EventListener(threading.Thread):
         self.statsd_client.incr("count.%s" % task.type, tags=task_tags)
 
     def track_timing(self, task):
-        pass
+        now = time.time()
+        task_timings = getattr(self.timings, task.uuid, {})
+        task_tags = get_tags(task)
+
+        if task.type == "task-received":
+            task_timings["received"] = now
+        elif task.type == "task-started":
+            task_timings["started"] = now
+
+            time_received = task_timings.get("received")
+            if time_received:
+                time_in_queue = now - time_received
+                self.statsd_client.timing("times.in_queue", time_in_queue * 1000, tags=task_tags)
+            else:
+                logger.error("Task %s didn't have received time" % task.uuid)
+        elif task.type == "task-succeeded" or task.type == "task-failed":
+            time_started = task_timings.get("started")
+            if time_started:
+                execution_time = now - time_started
+                self.statsd_client.timing("times.execution", execution_time * 1000, tags=task_tags)
+            else:
+                logger.error("Task %s didn't have started time" % task.uuid)
+
+            task_timings = {}
+
+        if len(task_timings) > 0:
+            setattr(self.timings, task.uuid, task_timings)
+        elif getattr(self.timings, task.uuid):
+            del self.timings.__dict__[task.uuid]
