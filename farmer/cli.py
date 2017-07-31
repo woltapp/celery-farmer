@@ -16,15 +16,21 @@ def cli():
 
 @cli.command()
 @click.option("--broker", "-b", help="Celery app's broker")
-def start(broker):
+@click.option("--poll-time", help="Specify polling time")
+def start(broker, poll_time):
     def stop_farmer(farmer, signal, frame):
         farmer.stop()
 
     if not broker:
         raise click.BadParameter("Broker url is missing", param_hint="--broker")
 
+    if poll_time:
+        poll_time = int(poll_time)
+    else:
+        poll_time = 1 * 10
+
     from farmer.application import Farmer
-    farmer = Farmer(broker)
+    farmer = Farmer(broker, poll_time)
     farmer.start()
 
     signal.signal(signal.SIGINT, partial(stop_farmer, farmer))
