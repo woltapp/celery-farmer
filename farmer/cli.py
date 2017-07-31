@@ -1,8 +1,8 @@
 from __future__ import absolute_import
 
+import sys
+import os
 import click
-
-from farmer.application import Farmer
 
 
 @click.group()
@@ -17,9 +17,15 @@ def start(broker):
     if not broker:
         raise click.BadParameter("Broker url is missing", param_hint="--broker")
 
+    from farmer.application import Farmer
     farmer = Farmer(broker)
     farmer.start()
 
 
+def _add_current_working_directory_to_path():
+    sys.path.append(os.getcwd())
+
+
 if __name__ == '__main__':
+    _add_current_working_directory_to_path()
     cli()
