@@ -3,6 +3,7 @@ import logging
 from celery import Celery
 
 from farmer.enable_events import EnableEvents
+from farmer.event_listener import EventListener
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -15,10 +16,12 @@ class Farmer(object):
         self.celery_app = Celery(broker=self.broker_url)
 
         self.enable_events_thread = EnableEvents(self.celery_app, poll_time)
+        self.event_listener_thread = EventListener(self.celery_app)
 
     def start(self):
         logger.info("Starting Farmer with broker %s" % self.broker_url)
         self.enable_events_thread.start()
+        self.event_listener_thread.start()
 
     def stop(self):
         logger.info("Stopping farmer")
