@@ -4,16 +4,17 @@ import logging
 import threading
 import time
 
-POLL_TIME = 1
 
 logger = logging.getLogger(__name__)
 
 
 class EnableEvents(threading.Thread):
-    def __init__(self, celery_app):
+    def __init__(self, celery_app, poll_time=1 * 60):
         super(EnableEvents, self).__init__()
 
         self.celery_app = celery_app
+        self.poll_time = poll_time
+
         self.is_terminated = False
 
     def stop(self):
@@ -24,5 +25,6 @@ class EnableEvents(threading.Thread):
             try:
                 self.celery_app.control.enable_events()
             finally:
-                logger.debug("Sleeping for %i seconds before enabling events again" % POLL_TIME)
-                time.sleep(POLL_TIME)
+                poll_time = self.poll_time
+                logger.debug("Sleeping for %i seconds before enabling events again" % poll_time)
+                time.sleep(poll_time)
