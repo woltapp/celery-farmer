@@ -24,12 +24,3 @@ For development, run `cli` directly with:
 ```
 python farmer/cli.py start --broker=<celery_broker_url>
 ```
-
-The farmer is intended to use in daemon mode in production, therefore currently the python process won't respect ctrl-c (Hopefully it will in the future). So to kill the running python process, figure out the PID and kill it with -9 directly.
-
-One way to obtain the PID and kill would be:
-```
-ps aux | grep farmer.*start
-<find correct process>
-kill -9 <pid>
-```
