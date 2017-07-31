@@ -2,7 +2,7 @@ from __future__ import absolute_import
 
 import click
 
-from application import Farmer
+from farmer.application import Farmer
 
 
 @click.group()
