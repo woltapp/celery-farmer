@@ -5,7 +5,7 @@ from celery import Celery
 from farmer.enable_events import EnableEvents
 from farmer.event_listener import EventListener
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 logger = logging.getLogger(__name__)
 

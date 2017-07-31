@@ -38,8 +38,5 @@ class EventListener(threading.Thread):
                 logger.error("Failed to capture events: %s", e)
                 time.sleep(try_interval)
 
-    def on_event(self, *args, **kwargs):
-        logger.info("Got event")
-        logger.info(args)
-        logger.info(kwargs)
-        logger.info("---")
+    def on_event(self, event):
+        logger.debug("Got event %s", str(event))
