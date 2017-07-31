@@ -2,6 +2,7 @@ amqp==1.4.9
 anyjson==0.3.3
 billiard==3.3.0.23
 celery==3.1.25
+click==6.7
 kombu==3.0.37
 pytz==2017.2
 redis==2.10.5
