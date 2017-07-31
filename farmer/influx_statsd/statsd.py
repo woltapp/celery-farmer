@@ -15,9 +15,7 @@ class InfluxDStatsDClient(object):
         prefix = config.get("prefix", "farmer")
 
         client = statsd.StatsClient(host, port, prefix=prefix)
-        logger.info('Configuring StatsD', extra={'statsd_port': port,
-                                                 'statsd_host': host,
-                                                 'statsd_prefix': prefix})
+        logger.info('Configuring StatsD, host: %s, port: %i, prefix: %s' % (host, port, prefix))
         self.client = client
 
     def timer(self, stat, tags=None, rate=1):  # pragma: no coverage

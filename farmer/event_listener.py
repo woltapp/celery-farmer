@@ -6,6 +6,8 @@ import time
 
 from celery.events import EventReceiver
 
+from farmer.task import get_tags
+
 logger = logging.getLogger(__name__)
 
 
@@ -16,6 +18,9 @@ class EventListener(threading.Thread):
 
         self.celery_app = celery_app
         self.state = self.celery_app.events.State()
+        self.statsd_client = statsd_client
+
+        self.timings = threading.local()
 
     def run(self):
         logger.info("Running EventListener")
@@ -39,4 +44,18 @@ class EventListener(threading.Thread):
                 time.sleep(try_interval)
 
     def on_event(self, event):
-        logger.debug("Got event %s", str(event))
+        if event["type"].startswith("task-"):
+            logger.debug("Got event %s", str(event))
+
+            self.state.event(event)
+            task = self.state.tasks.get(event["uuid"])
+
+            self.track_event(task)
+            self.track_timing(task)
+
+    def track_event(self, task):
+        task_tags = get_tags(task)
+        self.statsd_client.incr("count.%s" % task.type, tags=task_tags)
+
+    def track_timing(self, task):
+        pass
