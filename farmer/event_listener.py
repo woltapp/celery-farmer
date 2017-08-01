@@ -23,12 +23,12 @@ class EventListener(threading.Thread):
         self.timings = {}
 
     def run(self):
-        logger.info("Running EventListener")
-        try_interval = 1
+        logger.info("Running EventListener with daemon: %s" % str(self.isDaemon()))
+        sleep_time = 1
         while True:
             try:
-                if try_interval < 10:
-                    try_interval *= 2
+                if sleep_time < 10:
+                    sleep_time *= 2
 
                 with self.celery_app.connection() as connection:
                     receiver = EventReceiver(
@@ -36,12 +36,12 @@ class EventListener(threading.Thread):
                         handlers={"*": self.on_event},
                         app=self.celery_app
                     )
-                    try_interval = 1
+                    sleep_time = 1
                     receiver.capture(limit=None, timeout=None, wakeup=True)
             except Exception as e:
                 logger.debug(e, exc_info=True)
                 logger.error("Failed to capture events: %s", e)
-                time.sleep(try_interval)
+                time.sleep(sleep_time)
 
     def on_event(self, event):
         if event["type"].startswith("task-"):
