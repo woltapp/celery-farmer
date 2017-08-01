@@ -7,7 +7,7 @@ from farmer.event_listener import EventListener
 from farmer.queue_lengths import QueueLengths
 from farmer.influx_statsd.statsd import InfluxDStatsDClient
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 logger = logging.getLogger(__name__)
 
