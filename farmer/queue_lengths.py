@@ -33,6 +33,8 @@ class QueueLengths(threading.Thread):
                 queues = self._get_active_queues()
                 for queue_name in queues:
                     self._track_queue_length(queue_name)
+            except Exception as e:
+                logger.error("Failed to track queue lengths: %s", e)
             finally:
                 poll_time = self.poll_time
                 time.sleep(poll_time)
