@@ -30,3 +30,16 @@ class EventListenerTestCase(unittest.TestCase):
         self.assertEqual(statsd_mock.timing.call_count, 2)
         self.assertEqual(statsd_mock.timing.call_args[0][0], "times.execution")
         self.assertGreater(statsd_mock.timing.call_args[0][1], 0)
+
+    def test_cleans_tracked_times(self):
+        statsd_mock = Mock()
+        celery_app = Celery(broker="redis://localhost")
+        listener = EventListener(celery_app, statsd_mock)
+
+        listener.on_event(fixtures.task_received)
+        listener.on_event(fixtures.task_started)
+        task_id = fixtures.task_received["uuid"]
+        self.assertIsNotNone(listener.timings.get(task_id))
+
+        listener.on_event(fixtures.task_succeeded)
+        self.assertIsNone(listener.timings.get(task_id))
