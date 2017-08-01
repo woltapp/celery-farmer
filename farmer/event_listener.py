@@ -20,7 +20,7 @@ class EventListener(threading.Thread):
         self.state = self.celery_app.events.State()
         self.statsd_client = statsd_client
 
-        self.timings = threading.local()
+        self.timings = {}
 
     def run(self):
         logger.info("Running EventListener")
@@ -59,7 +59,7 @@ class EventListener(threading.Thread):
 
     def track_timing(self, task):
         now = time.time()
-        task_timings = getattr(self.timings, task.uuid, {})
+        task_timings = self.timings.get(task.uuid, {})
         task_tags = get_tags(task)
 
         if task.type == "task-received":
@@ -84,6 +84,6 @@ class EventListener(threading.Thread):
             task_timings = {}
 
         if len(task_timings) > 0:
-            setattr(self.timings, task.uuid, task_timings)
-        elif getattr(self.timings, task.uuid):
-            del self.timings.__dict__[task.uuid]
+            self.timings[task.uuid] = task_timings
+        elif self.timings.get(task.uuid):
+            del self.timings[task.uuid]
