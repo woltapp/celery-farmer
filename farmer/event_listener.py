@@ -69,8 +69,8 @@ class EventListener(threading.Thread):
 
             time_received = task_timings.get("received")
             if time_received:
-                time_in_queue = now - time_received
-                self.statsd_client.timing("times.in_queue", time_in_queue * 1000, tags=task_tags)
+                time_not_started = now - time_received
+                self.statsd_client.timing("times.not_started", time_not_started * 1000, tags=task_tags)
             else:
                 logger.error("Task %s didn't have received time" % task.uuid)
         elif task.type == "task-succeeded" or task.type == "task-failed":
