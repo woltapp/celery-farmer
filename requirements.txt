@@ -1,10 +1,10 @@
-amqp==1.4.9
+amqp==2.2.1
 anyjson==0.3.3
-billiard==3.3.0.23
-celery==3.1.25
+billiard==3.5.0.3
+celery==4.0.0
 click==6.7
 funcsigs==1.0.2
-kombu==3.0.37
+kombu==4.1.0
 mock==2.0.0
 pbr==3.1.1
 py==1.4.34
@@ -13,4 +13,4 @@ pytz==2017.2
 redis==2.10.5
 six==1.10.0
 statsd==3.2.1
-wheel==0.24.0
+vine==1.1.4
