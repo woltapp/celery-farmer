@@ -3,7 +3,7 @@ anyjson==0.3.3
 awscli==1.11.129
 billiard==3.5.0.3
 botocore==1.5.92
-celery==4.0.0
+celery==4.1
 click==6.7
 colorama==0.3.7
 docutils==0.14
