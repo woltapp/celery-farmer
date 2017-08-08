@@ -24,6 +24,7 @@ class EnableEvents(threading.Thread):
     def run(self):
         logger.info("Running EnableEvents")
         while not self.is_terminated:
+            logger.debug("Enabling events")
             try:
                 self.celery_app.control.enable_events()
             finally:

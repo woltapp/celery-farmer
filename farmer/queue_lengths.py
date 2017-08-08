@@ -29,6 +29,7 @@ class QueueLengths(threading.Thread):
     def run(self):
         logger.info("Running QueueLengths")
         while not self.is_terminated:
+            logger.debug("Sending heart beat")
             self.statsd_client.incr("heartbeats.queue_lengths")
             try:
                 queues = self._get_active_queues()
