@@ -15,7 +15,9 @@ class InfluxDStatsDClient(object):
         prefix = config.get("prefix", "farmer")
 
         client = statsd.StatsClient(host, port, prefix=prefix)
-        logger.info('Configuring StatsD, host: %s, port: %i, prefix: %s' % (host, port, prefix))
+        logger.info(
+            f'Configuring StatsD, host: {host}, port: {port}, prefix: {prefix}'
+        )
         self.client = client
 
     def timer(self, stat, tags=None, rate=1):  # pragma: no coverage
@@ -38,9 +40,9 @@ class InfluxDStatsDClient(object):
 
     def _get_stat(self, stat, tags):
         if tags:
-            stat = '%s,%s' % (stat, self._format_tags(tags))
+            stat = f'{stat},{self._format_tags(tags)}'
         return stat
 
     def _format_tags(self, tags):
-        tag_pairs = ['%s=%s' % (k, v) for k, v in tags.items()]
+        tag_pairs = (f'{k}={v}' for k, v in tags.items())
         return ','.join(tag_pairs)

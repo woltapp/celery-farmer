@@ -25,7 +25,7 @@ class Farmer(object):
         self.event_listener_thread = EventListener(self.celery_app, self.statsd_client)
 
     def start(self):
-        logger.info("Starting Farmer with broker %s" % self.broker_url)
+        logger.info(f'Starting Farmer with broker {self.broker_url}')
         self.enable_events_thread.start()
         self.queue_lenghts_thread.start()
 

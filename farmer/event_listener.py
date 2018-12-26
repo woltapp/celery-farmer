@@ -23,7 +23,7 @@ class EventListener(threading.Thread):
         self.timings = {}
 
     def run(self):
-        logger.info("Running EventListener with daemon: %s" % str(self.isDaemon()))
+        logger.info(f'Running EventListener with daemon: {self.isDaemon()}')
         sleep_time = 1
         while True:
             try:
@@ -40,12 +40,12 @@ class EventListener(threading.Thread):
                     receiver.capture(limit=None, timeout=None, wakeup=True)
             except Exception as e:
                 logger.debug(e, exc_info=True)
-                logger.error("Failed to capture events: %s", e)
+                logger.error(f'Failed to capture events: {e}')
                 time.sleep(sleep_time)
 
     def on_event(self, event):
-        if event["type"].startswith("task-"):
-            logger.debug("Got event %s", str(event))
+        if event['type'].startswith('task-'):
+            logger.debug(f'Got event {event}')
 
             self.state.event(event)
             task = self.state.tasks.get(event["uuid"])
@@ -55,7 +55,7 @@ class EventListener(threading.Thread):
 
     def track_event(self, task):
         task_tags = get_tags(task)
-        self.statsd_client.incr("tasks.counts.%s" % task.type, tags=task_tags)
+        self.statsd_client.incr(f'tasks.counts.{task.type}', tags=task_tags)
 
     def track_timing(self, task):
         now = time.time()
@@ -72,14 +72,14 @@ class EventListener(threading.Thread):
                 time_not_started = now - time_received
                 self.statsd_client.timing("tasks.times.not_started", time_not_started * 1000, tags=task_tags)
             else:
-                logger.error("Task %s didn't have received time" % task.uuid)
-        elif task.type == "task-succeeded" or task.type == "task-failed":
-            time_started = task_timings.get("started")
+                logger.error(f"Task {task.uuid} didn't have received time")
+        elif task.type == 'task-succeeded' or task.type == 'task-failed':
+            time_started = task_timings.get('started')
             if time_started:
                 execution_time = now - time_started
                 self.statsd_client.timing("tasks.times.execution", execution_time * 1000, tags=task_tags)
             else:
-                logger.error("Task %s didn't have started time" % task.uuid)
+                logger.error(f"Task {task.uuid} didn't have started time")
 
             task_timings = {}
 
