@@ -36,8 +36,30 @@ pipenv install --dev
 ```
 
 ### Running tests
+Run all tests, typecheck and linter with:
+```
+pipenv run all-tests
+```
 
-Run tests with pytest:
+Run only typecheck with:
+```
+pipenv run typecheck
+```
+
+Run only tests with:
+```
+pipenv run test
+```
+Or invoke `pytest` directly:
 ```
 pytest
+```
+
+Run only linter with:
+```
+pipenv run lint
+```
+Or invoke `flake` directly:
+```
+flake8
 ```
