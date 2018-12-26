@@ -1,5 +1,7 @@
 [run]
-source = .
+source =
+    src
+    tests
 
 [report]
-fail_under = 84
+fail_under = 87

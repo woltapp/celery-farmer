@@ -15,6 +15,13 @@ setuptools.setup(
     url='https://github.com/woltapp/farmer',
     packages=setuptools.find_packages(where='src'),
     package_dir={'': 'src'},
+    setup_requires=[
+        'pytest-runner',
+    ],
+    tests_require=[
+        'pytest',
+        'pytest-cov',
+    ],
     install_requires=[
         'statsd>=3.2.0,<4.0',
         'redis>=2.10.0,<4.0',

@@ -8,6 +8,7 @@ pytest = "*"
 flake8 = "*"
 pytest-cov = "*"
 mypy = "*"
+tox = "*"
 
 [packages]
 farmer = {editable = true,path = "."}
