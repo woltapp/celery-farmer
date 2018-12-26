@@ -1,16 +1,20 @@
 import logging
 import threading
 import time
+from typing import Any, Dict
 
+from celery import Celery
 from celery.events import EventReceiver
+from celery.events.state import State
 
+from farmer.statsd import StatsClient
 from farmer.task import get_tags
 
 logger = logging.getLogger(__name__)
 
 
 class EventListener(threading.Thread):
-    def __init__(self, celery_app, statsd_client):
+    def __init__(self, celery_app: Celery, statsd_client: StatsClient) -> None:
         super().__init__()
         self.daemon = True
 
@@ -20,13 +24,13 @@ class EventListener(threading.Thread):
 
         self.is_terminated = False
 
-        self.timings = {}
+        self.timings: Dict[str, Dict[str, Any]] = {}
 
-    def stop(self):
+    def stop(self) -> None:
         logger.info('Stopping EventListener')
         self.is_terminated = True
 
-    def run(self):
+    def run(self) -> None:
         logger.info(f'Running EventListener with daemon: {self.isDaemon()}')
         sleep_time = 1
         while not self.is_terminated:
@@ -47,7 +51,7 @@ class EventListener(threading.Thread):
                 logger.error(f'Failed to capture events: {e}')
                 time.sleep(sleep_time)
 
-    def on_event(self, event):
+    def on_event(self, event: Dict[str, Any]) -> None:
         if event['type'].startswith('task-'):
             logger.debug(f'Got event {event}')
 
@@ -57,11 +61,11 @@ class EventListener(threading.Thread):
             self.track_event(task)
             self.track_timing(task)
 
-    def track_event(self, task):
+    def track_event(self, task: State.Task) -> None:
         task_tags = get_tags(task)
         self.statsd_client.incr(f'tasks.counts.{task.type}', tags=task_tags)
 
-    def track_timing(self, task):
+    def track_timing(self, task: State.Task) -> None:
         now = time.time()
         task_timings = self.timings.get(task.uuid, {})
         task_tags = get_tags(task)

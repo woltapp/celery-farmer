@@ -1,5 +1,7 @@
 from functools import partial
+from inspect import FrameInfo
 import signal
+from typing import Any, Dict
 
 import click
 
@@ -9,7 +11,7 @@ from farmer.application import Farmer
 
 @click.group()
 @click.version_option(farmer.__version__)
-def cli():
+def cli() -> None:
     pass
 
 
@@ -23,12 +25,14 @@ def cli():
               help='Statsd port')
 @click.option('--statsd-prefix', '-spr', envvar='STATSD_PREFIX',
               help='Statsd prefix')
-def start(broker, poll_time, statsd_host, statsd_port, statsd_prefix):
-    def stop_farmer(farmer, signal, frame):
+def start(broker: str, poll_time: float, statsd_host: str, statsd_port: int,
+          statsd_prefix: str) -> None:
+    def stop_farmer(farmer: Farmer, signal: int, frame: FrameInfo) -> None:
         farmer.stop()
 
-    def construct_statsd_configs(host, port, prefix):
-        config = {}
+    def construct_statsd_configs(host: str, port: int, prefix: str
+                                 ) -> Dict[str, Any]:
+        config: Dict[str, Any] = {}
         if host:
             config['host'] = host
         if port:

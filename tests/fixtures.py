@@ -1,4 +1,6 @@
-task_received = {
+from typing import Any, Dict
+
+task_received: Dict[str, Any] = {
     'retries': 0,
     'expires': None,
     'name': 'tasks.add',
@@ -15,7 +17,7 @@ task_received = {
     'uuid': '58369920-91ae-4825-9f22-72cf1dbd66b6'
 }
 
-task_started = {
+task_started: Dict[str, Any] = {
     'local_received': 1501507843.903568,
     'uuid': '58369920-91ae-4825-9f22-72cf1dbd66b6',
     'clock': 8090,
@@ -26,7 +28,7 @@ task_started = {
     'type': 'task-started'
 }
 
-task_succeeded = {
+task_succeeded: Dict[str, Any] = {
     'local_received': 1501507843.904243,
     'uuid': '58369920-91ae-4825-9f22-72cf1dbd66b6',
     'clock': 8091,
@@ -39,7 +41,7 @@ task_succeeded = {
     'type': 'task-succeeded'
 }
 
-active_queues_response = {
+active_queues_response: Dict[str, Any] = {
     'celery@foobar': [{
         'exclusive': False,
         'name': 'celery',

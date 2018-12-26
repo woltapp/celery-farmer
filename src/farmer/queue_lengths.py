@@ -2,14 +2,19 @@ from itertools import chain
 import logging
 import threading
 import time
+from typing import Set
+
+from celery import Celery
 
 from farmer.broker import RedisBroker
+from farmer.statsd import StatsClient
 
 logger = logging.getLogger(__name__)
 
 
 class QueueLengths(threading.Thread):
-    def __init__(self, celery_app, statsd_client, poll_time=1 * 10):
+    def __init__(self, celery_app: Celery, statsd_client: StatsClient,
+                 poll_time: float = 10.0) -> None:
         super().__init__()
 
         self.celery_app = celery_app
@@ -21,11 +26,11 @@ class QueueLengths(threading.Thread):
         self.broker = RedisBroker(
             redis_uri=self.celery_app.broker_connection().as_uri())
 
-    def stop(self):
+    def stop(self) -> None:
         logger.info('Stopping QueueLengths')
         self.is_terminated = True
 
-    def run(self):
+    def run(self) -> None:
         logger.info('Running QueueLengths')
         while not self.is_terminated:
             logger.debug('Sending heart beat')
@@ -40,7 +45,7 @@ class QueueLengths(threading.Thread):
                 poll_time = self.poll_time
                 time.sleep(poll_time)
 
-    def _get_active_queues(self):
+    def _get_active_queues(self) -> Set[str]:
         response = self.celery_app.control.inspect().active_queues()
         if response is None:
             return set()
@@ -52,7 +57,7 @@ class QueueLengths(threading.Thread):
 
         return set(chain(*queues))
 
-    def _track_queue_length(self, queue_name):
+    def _track_queue_length(self, queue_name: str) -> None:
         length = self.broker.get_queue_length(queue_name)
         tags = {'queue': queue_name}
 
