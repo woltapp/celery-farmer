@@ -5,10 +5,10 @@ from pytest import fixture
 
 
 @fixture
-def celery_app():
+def celery_app() -> Celery:
     return Celery(broker='redis://localhost')
 
 
 @fixture(scope='function')
-def statsd_mock():
+def statsd_mock() -> Mock:
     return Mock()
