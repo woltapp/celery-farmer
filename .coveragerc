@@ -1,0 +1,5 @@
+[run]
+source = .
+
+[report]
+fail_under = 82
