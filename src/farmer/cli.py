@@ -1,7 +1,6 @@
 from functools import partial
 import os
 import signal
-import sys
 
 import click
 
@@ -61,10 +60,5 @@ def start(broker, poll_time, statsd_host, statsd_port, statsd_prefix):
     signal.pause()
 
 
-def _add_current_working_directory_to_path():
-    sys.path.append(os.getcwd())
-
-
 if __name__ == '__main__':
-    _add_current_working_directory_to_path()
     cli()
