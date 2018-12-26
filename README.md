@@ -4,26 +4,40 @@
 
 Farmer will monitor how the Celery cluster is behaving.
 
-## Requirements
+## Usage
 
-- Python, currently only version 3.7 is supported
-- Pipenv is recommended for development
+### Requirements
+- Python, currently only Python 3.7 is supported
+- Pip or Pipenv
 
-Install development requirements with:
+### Install
+Install package with pipenv:
+
+```
+pipenv install .
+```
+
+### Run
+Run farmer with shell command:
+```
+farmer
+```
+
+### Configuration
+
+## Development
+
+### Requirements
+- Pipenv
+
+Clone repository and install development requirements with:
 ```
 pipenv install --dev
 ```
 
-## Tests
+### Running tests
 
 Run tests with pytest:
 ```
 pytest
-```
-
-## Running
-
-For development, run `cli` directly with:
-```
-python farmer/cli.py start --broker=<celery_broker_url>
 ```
