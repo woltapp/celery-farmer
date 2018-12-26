@@ -35,11 +35,11 @@ def start(broker, poll_time, statsd_host, statsd_port, statsd_prefix):
             config['prefix'] = prefix
         return config
 
-    broker = os.environ.get('BROKER', broker)
-    poll_time = os.environ.get('POLL_TIME', poll_time)
-    statsd_host = os.environ.get('STATSD_HOST', statsd_host)
-    statsd_port = os.environ.get('STATSD_PORT', statsd_port)
-    statsd_prefix = os.environ.get('STATSD_PREFIX', statsd_prefix)
+    broker = os.getenv('BROKER', broker)
+    poll_time = os.getenv('POLL_TIME', poll_time)
+    statsd_host = os.getenv('STATSD_HOST', statsd_host)
+    statsd_port = os.getenv('STATSD_PORT', statsd_port)
+    statsd_prefix = os.getenv('STATSD_PREFIX', statsd_prefix)
 
     if not broker:
         raise click.BadParameter('Broker url is missing',
