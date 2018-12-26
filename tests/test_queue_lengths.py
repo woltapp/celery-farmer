@@ -1,4 +1,3 @@
-import unittest
 from unittest.mock import Mock, patch
 
 from celery import Celery
@@ -9,34 +8,43 @@ from tests.helpers import wait_until_success
 
 
 @patch('celery.app.control.Inspect.active_queues')
-class QueueLengthsTestCase(unittest.TestCase):
+def test_tracks_counts_of_events(active_queues):
+    active_queues.return_value = fixtures.active_queues_response
+    statsd_mock = Mock()
+    queue_lengths = QueueLengths(
+        Celery(broker='redis://localhost'),
+        statsd_client=statsd_mock,
+        poll_time=0.1,
+    )
 
-    def setUp(self):
-        self.statsd_mock = Mock()
-        self.queue_lengths = QueueLengths(
-            Celery(broker='redis://localhost'),
-            statsd_client=self.statsd_mock,
-            poll_time=0.1,
-        )
+    try:
+        queue_lengths.start()
 
-    def test_tracks_counts_of_events(self, active_queues):
-        active_queues.return_value = fixtures.active_queues_response
+        def assert_mock_gauge_called():
+            assert statsd_mock.gauge.called
 
-        try:
-            self.queue_lengths.start()
-            wait_until_success(
-                lambda: self.assertTrue(self.statsd_mock.gauge.called))
-        finally:
-            self.queue_lengths.stop()
+        wait_until_success(assert_mock_gauge_called)
+    finally:
+        queue_lengths.stop()
 
-    def test_sends_heartbeats(self, active_queues):
-        active_queues.return_value = fixtures.active_queues_response
 
-        try:
-            self.queue_lengths.start()
-            wait_until_success(
-                lambda: self.assertTrue(self.statsd_mock.incr.called))
-            self.assertEqual(self.statsd_mock.incr.call_args[0][0],
-                             'heartbeats.queue_lengths')
-        finally:
-            self.queue_lengths.stop()
+@patch('celery.app.control.Inspect.active_queues')
+def test_sends_heartbeats(active_queues):
+    active_queues.return_value = fixtures.active_queues_response
+    statsd_mock = Mock()
+    queue_lengths = QueueLengths(
+        Celery(broker='redis://localhost'),
+        statsd_client=statsd_mock,
+        poll_time=0.1,
+    )
+
+    try:
+        queue_lengths.start()
+
+        def assert_mock_incr_called():
+            assert statsd_mock.incr.called
+
+        wait_until_success(assert_mock_incr_called)
+        assert statsd_mock.incr.call_args[0][0] == 'heartbeats.queue_lengths'
+    finally:
+        queue_lengths.stop()
