@@ -7,9 +7,11 @@ import click
 
 from functools import partial
 
+import farmer
+
 
 @click.group()
-@click.version_option("0.1-alpha")
+@click.version_option(farmer.__version__)
 def cli():
     pass
 
