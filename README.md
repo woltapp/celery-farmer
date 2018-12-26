@@ -6,10 +6,8 @@ Farmer will monitor how the Celery cluster is behaving.
 
 ## Requirements
 
-Install requirements with pipenv:
-```
-pipenv install
-```
+- Python, currently only version 3.7 is supported
+- Pipenv is recommended for development
 
 Install development requirements with:
 ```

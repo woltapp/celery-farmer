@@ -5,13 +5,10 @@ verify_ssl = true
 
 [dev-packages]
 pytest = "*"
+mock = "*"
 
 [packages]
-mock = "*"
-redis = "*"
-celery = "*"
-click = "*"
-statsd = "*"
+farmer = {editable = true,path = "."}
 
 [requires]
 python_version = "3.7"
