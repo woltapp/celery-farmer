@@ -5,7 +5,7 @@ import statsd
 logger = logging.getLogger(__name__)
 
 
-class InfluxDStatsDClient:
+class StatsClient:
 
     def __init__(self, config):
         host = config.get('host', 'localhost')

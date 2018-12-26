@@ -5,7 +5,7 @@ from celery import Celery
 from farmer.enable_events import EnableEvents
 from farmer.event_listener import EventListener
 from farmer.queue_lengths import QueueLengths
-from farmer.influx_statsd.statsd import InfluxDStatsDClient
+from farmer.statsd import StatsClient
 
 logging.basicConfig(
     level=logging.INFO,
@@ -20,7 +20,7 @@ class Farmer:
         self.broker_url = broker_url
         self.celery_app = Celery(broker=self.broker_url)
 
-        self.statsd_client = InfluxDStatsDClient(statsd_config)
+        self.statsd_client = StatsClient(statsd_config)
 
         self.enable_events_thread = EnableEvents(self.celery_app, poll_time)
         self.queue_lenghts_thread = QueueLengths(self.celery_app,
