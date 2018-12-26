@@ -12,5 +12,4 @@ def wait_until_success(function, poll_time=0.1, poll_count=10):
             time.sleep(poll_time)
 
     if not success:
-        raise AssertionError(
-            f'Waited {poll_time * poll_count}s without success')
+        assert False, f'Waited {poll_time * poll_count}s without success'
