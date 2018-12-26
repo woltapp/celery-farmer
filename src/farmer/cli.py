@@ -14,7 +14,7 @@ def cli():
 
 
 @cli.command()
-@click.option('--broker', '-b', envvar='BROKER',
+@click.option('--broker', '-b', envvar='BROKER', required=True,
               help="Celery app's broker url")
 @click.option('--poll-time', envvar='POLL_TIME', type=int, default=10,
               help='Specify polling time')
@@ -37,9 +37,6 @@ def start(broker, poll_time, statsd_host, statsd_port, statsd_prefix):
             config['prefix'] = prefix
         return config
 
-    if not broker:
-        raise click.BadParameter('Broker url is missing',
-                                 param_hint='--broker')
     farmer = Farmer(
         broker,
         poll_time,
