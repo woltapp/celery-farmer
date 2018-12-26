@@ -18,12 +18,18 @@ class EventListener(threading.Thread):
         self.state = self.celery_app.events.State()
         self.statsd_client = statsd_client
 
+        self.is_terminated = False
+
         self.timings = {}
+
+    def stop(self):
+        logger.info('Stopping EventListener')
+        self.is_terminated = True
 
     def run(self):
         logger.info(f'Running EventListener with daemon: {self.isDaemon()}')
         sleep_time = 1
-        while True:
+        while not self.is_terminated:
             try:
                 if sleep_time < 10:
                     sleep_time *= 2

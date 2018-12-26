@@ -38,5 +38,6 @@ class Farmer:
 
     def stop(self):
         logger.info('Stopping farmer')
+        self.event_listener_thread.stop()
         self.enable_events_thread.stop()
         self.queue_lenghts_thread.stop()
