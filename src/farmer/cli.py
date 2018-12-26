@@ -16,9 +16,11 @@ def cli():
 @cli.command()
 @click.option('--broker', '-b', envvar='BROKER',
               help="Celery app's broker url")
-@click.option('--poll-time', envvar='POLL_TIME', help='Specify polling time')
+@click.option('--poll-time', envvar='POLL_TIME', type=int, default=10,
+              help='Specify polling time')
 @click.option('--statsd-host', '-sh', envvar='STASTD_HOST', help='Statsd host')
-@click.option('--statsd-port', '-sp', envvar='STATSD_PORT', help='Statsd port')
+@click.option('--statsd-port', '-sp', envvar='STATSD_PORT', type=int,
+              help='Statsd port')
 @click.option('--statsd-prefix', '-spr', envvar='STATSD_PREFIX',
               help='Statsd prefix')
 def start(broker, poll_time, statsd_host, statsd_port, statsd_prefix):
@@ -30,7 +32,7 @@ def start(broker, poll_time, statsd_host, statsd_port, statsd_prefix):
         if host:
             config['host'] = host
         if port:
-            config['port'] = int(port)
+            config['port'] = port
         if prefix:
             config['prefix'] = prefix
         return config
@@ -38,12 +40,6 @@ def start(broker, poll_time, statsd_host, statsd_port, statsd_prefix):
     if not broker:
         raise click.BadParameter('Broker url is missing',
                                  param_hint='--broker')
-
-    if poll_time:
-        poll_time = int(poll_time)
-    else:
-        poll_time = 1 * 10
-
     farmer = Farmer(
         broker,
         poll_time,
