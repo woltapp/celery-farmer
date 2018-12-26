@@ -1,7 +1,7 @@
+from itertools import chain
 import logging
 import threading
 import time
-from itertools import chain
 
 from farmer.broker import RedisBroker
 

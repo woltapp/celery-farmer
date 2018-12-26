@@ -1,11 +1,9 @@
 import unittest
 
+from celery import Celery
 from mock import Mock
 
-from celery import Celery
-
 from farmer.event_listener import EventListener
-
 from tests import fixtures
 
 

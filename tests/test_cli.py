@@ -1,6 +1,7 @@
 import unittest
-from mock import patch
+
 from click.testing import CliRunner
+from mock import patch
 
 from farmer.cli import cli
 

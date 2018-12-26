@@ -1,11 +1,12 @@
-import sys
+from functools import partial
 import os
 import signal
+import sys
+
 import click
 
-from functools import partial
-
 import farmer
+from farmer.application import Farmer
 
 
 @click.group()
@@ -49,7 +50,6 @@ def start(broker, poll_time, statsd_host, statsd_port, statsd_prefix):
     else:
         poll_time = 1 * 10
 
-    from farmer.application import Farmer
     farmer = Farmer(
         broker,
         poll_time,
