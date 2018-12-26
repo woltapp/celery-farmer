@@ -15,7 +15,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-class Farmer(object):
+class Farmer:
     def __init__(self, broker_url, poll_time, statsd_config):
         self.broker_url = broker_url
         self.celery_app = Celery(broker=self.broker_url)

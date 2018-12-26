@@ -1,7 +1,7 @@
 import redis
 
 
-class Broker(object):
+class Broker:
     def get_queue_length(self, queue):
         raise NotImplementedError(
             'Subclass needs to implement get_queue_length')
