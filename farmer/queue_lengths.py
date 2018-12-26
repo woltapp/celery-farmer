@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 class QueueLengths(threading.Thread):
     def __init__(self, celery_app, statsd_client, poll_time=1 * 10):
-        super(QueueLengths, self).__init__()
+        super().__init__()
 
         self.celery_app = celery_app
         self.statsd_client = statsd_client

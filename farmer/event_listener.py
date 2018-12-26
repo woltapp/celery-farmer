@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 class EventListener(threading.Thread):
     def __init__(self, celery_app, statsd_client):
-        super(EventListener, self).__init__()
+        super().__init__()
         self.daemon = True
 
         self.celery_app = celery_app

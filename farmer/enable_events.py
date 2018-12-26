@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 class EnableEvents(threading.Thread):
     def __init__(self, celery_app, poll_time=1 * 10):
-        super(EnableEvents, self).__init__()
+        super().__init__()
 
         self.celery_app = celery_app
         self.poll_time = poll_time
