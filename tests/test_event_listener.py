@@ -1,43 +1,34 @@
-from unittest.mock import Mock
-
-from celery import Celery
+from pytest import fixture
 
 from farmer.event_listener import EventListener
 from tests import fixtures
 
 
-def test_tracks_counts_of_events():
-    statsd_mock = Mock()
-    celery_app = Celery(broker='redis://localhost')
-    listener = EventListener(celery_app, statsd_mock)
+@fixture(scope='function')
+def _listener(celery_app, statsd_mock):
+    return EventListener(celery_app, statsd_mock)
 
-    listener.on_event(fixtures.task_received)
+
+def test_tracks_counts_of_events(_listener, statsd_mock):
+    _listener.on_event(fixtures.task_received)
     assert statsd_mock.incr.called
 
 
-def test_tracks_times():
-    statsd_mock = Mock()
-    celery_app = Celery(broker='redis://localhost')
-    listener = EventListener(celery_app, statsd_mock)
-
-    listener.on_event(fixtures.task_received)
-    listener.on_event(fixtures.task_started)
-    listener.on_event(fixtures.task_succeeded)
+def test_tracks_times(_listener, statsd_mock):
+    _listener.on_event(fixtures.task_received)
+    _listener.on_event(fixtures.task_started)
+    _listener.on_event(fixtures.task_succeeded)
 
     assert statsd_mock.timing.call_count == 2
     assert statsd_mock.timing.call_args[0][0] == 'tasks.times.execution'
     assert statsd_mock.timing.call_args[0][1] > 0
 
 
-def test_cleans_tracked_times():
-    statsd_mock = Mock()
-    celery_app = Celery(broker='redis://localhost')
-    listener = EventListener(celery_app, statsd_mock)
-
-    listener.on_event(fixtures.task_received)
-    listener.on_event(fixtures.task_started)
+def test_cleans_tracked_times(_listener):
+    _listener.on_event(fixtures.task_received)
+    _listener.on_event(fixtures.task_started)
     task_id = fixtures.task_received['uuid']
-    assert listener.timings.get(task_id) is not None
+    assert _listener.timings.get(task_id) is not None
 
-    listener.on_event(fixtures.task_succeeded)
-    assert listener.timings.get(task_id) is None
+    _listener.on_event(fixtures.task_succeeded)
+    assert _listener.timings.get(task_id) is None
