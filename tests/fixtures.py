@@ -1,7 +1,145 @@
-task_received = {u'retries': 0, u'expires': None, u'name': u'tasks.add', u'clock': 8089, u'timestamp': 1501507843.900996, u'args': u'(1, 2)', u'pid': 24317, u'utcoffset': -3, u'eta': None, 'local_received': 1501507843.901737, u'kwargs': u'{}', u'type': u'task-received', u'hostname': u'celery@Valtteris-MacBook-Pro-2.local', u'uuid': u'58369920-91ae-4825-9f22-72cf1dbd66b6'}  # noqa
+task_received = {
+    'retries': 0,
+    'expires': None,
+    'name': 'tasks.add',
+    'clock': 8089,
+    'timestamp': 1501507843.900996,
+    'args': '(1, 2)',
+    'pid': 24317,
+    'utcoffset': -3,
+    'eta': None,
+    'local_received': 1501507843.901737,
+    'kwargs': '{}',
+    'type': 'task-received',
+    'hostname': 'celery@Valtteris-MacBook-Pro-2.local',
+    'uuid': '58369920-91ae-4825-9f22-72cf1dbd66b6'
+}
 
-task_started = {'local_received': 1501507843.903568, u'uuid': u'58369920-91ae-4825-9f22-72cf1dbd66b6', u'clock': 8090, u'timestamp': 1501507843.90302, u'hostname': u'celery@Valtteris-MacBook-Pro-2.local', u'pid': 24317, u'utcoffset': -3, u'type': u'task-started'}  # noqa
+task_started = {
+    'local_received': 1501507843.903568,
+    'uuid': '58369920-91ae-4825-9f22-72cf1dbd66b6',
+    'clock': 8090,
+    'timestamp': 1501507843.90302,
+    'hostname': 'celery@Valtteris-MacBook-Pro-2.local',
+    'pid': 24317,
+    'utcoffset': -3,
+    'type': 'task-started'
+}
 
-task_succeeded = {'local_received': 1501507843.904243, u'uuid': u'58369920-91ae-4825-9f22-72cf1dbd66b6', u'clock': 8091, u'timestamp': 1501507843.90374, u'hostname': u'celery@Valtteris-MacBook-Pro-2.local', u'pid': 24317, u'utcoffset': -3, u'result': u"'3'", u'runtime': 0.0014360779896378517, u'type': u'task-succeeded'}  # noqa
+task_succeeded = {
+    'local_received': 1501507843.904243,
+    'uuid': '58369920-91ae-4825-9f22-72cf1dbd66b6',
+    'clock': 8091,
+    'timestamp': 1501507843.90374,
+    'hostname': 'celery@Valtteris-MacBook-Pro-2.local',
+    'pid': 24317,
+    'utcoffset': -3,
+    'result': "'3'",
+    'runtime': 0.0014360779896378517,
+    'type': 'task-succeeded'
+}
 
-active_queues_response = {u'celery@foobar': [{u'exclusive': False, u'name': u'celery', u'exchange': {u'name': u'celery', u'durable': True, u'delivery_mode': 2, u'passive': False, u'arguments': None, u'type': u'direct', u'auto_delete': False}, u'durable': True, u'routing_key': u'celery', u'no_ack': False, u'alias': None, u'queue_arguments': None, u'binding_arguments': None, u'bindings': [], u'auto_delete': False}, {u'exclusive': False, u'name': u'foobar', u'exchange': {u'name': u'foobar', u'durable': True, u'delivery_mode': 2, u'passive': False, u'arguments': None, u'type': u'direct', u'auto_delete': False}, u'durable': True, u'routing_key': u'foobar', u'no_ack': False, u'alias': None, u'queue_arguments': None, u'binding_arguments': None, u'bindings': [], u'auto_delete': False}, {u'exclusive': False, u'name': u'baz', u'exchange': {u'name': u'baz', u'durable': True, u'delivery_mode': 2, u'passive': False, u'arguments': None, u'type': u'direct', u'auto_delete': False}, u'durable': True, u'routing_key': u'baz', u'no_ack': False, u'alias': None, u'queue_arguments': None, u'binding_arguments': None, u'bindings': [], u'auto_delete': False}], u'celery@Valtteris-MacBook-Pro-2.local': [{u'exclusive': False, u'name': u'celery', u'exchange': {u'name': u'celery', u'durable': True, u'delivery_mode': 2, u'passive': False, u'arguments': None, u'type': u'direct', u'auto_delete': False}, u'durable': True, u'routing_key': u'celery', u'no_ack': False, u'alias': None, u'queue_arguments': None, u'binding_arguments': None, u'bindings': [], u'auto_delete': False}, {u'exclusive': False, u'name': u'foobar', u'exchange': {u'name': u'foobar', u'durable': True, u'delivery_mode': 2, u'passive': False, u'arguments': None, u'type': u'direct', u'auto_delete': False}, u'durable': True, u'routing_key': u'foobar', u'no_ack': False, u'alias': None, u'queue_arguments': None, u'binding_arguments': None, u'bindings': [], u'auto_delete': False}]}  # noqa
+active_queues_response = {
+    'celery@foobar': [{
+        'exclusive': False,
+        'name': 'celery',
+        'exchange': {
+            'name': 'celery',
+            'durable': True,
+            'delivery_mode': 2,
+            'passive': False,
+            'arguments': None,
+            'type': 'direct',
+            'auto_delete': False
+        },
+        'durable': True,
+        'routing_key': 'celery',
+        'no_ack': False,
+        'alias': None,
+        'queue_arguments': None,
+        'binding_arguments': None,
+        'bindings': [],
+        'auto_delete': False
+    }, {
+        'exclusive': False,
+        'name': 'foobar',
+        'exchange': {
+            'name': 'foobar',
+            'durable': True,
+            'delivery_mode': 2,
+            'passive': False,
+            'arguments': None,
+            'type': 'direct',
+            'auto_delete': False
+        },
+        'durable': True,
+        'routing_key': 'foobar',
+        'no_ack': False,
+        'alias': None,
+        'queue_arguments': None,
+        'binding_arguments': None,
+        'bindings': [],
+        'auto_delete': False
+    }, {
+        'exclusive': False,
+        'name': 'baz',
+        'exchange': {
+            'name': 'baz',
+            'durable': True,
+            'delivery_mode': 2,
+            'passive': False,
+            'arguments': None,
+            'type': 'direct',
+            'auto_delete': False
+        },
+        'durable': True,
+        'routing_key': 'baz',
+        'no_ack': False,
+        'alias': None,
+        'queue_arguments': None,
+        'binding_arguments': None,
+        'bindings': [],
+        'auto_delete': False
+    }],
+    'celery@Valtteris-MacBook-Pro-2.local': [{
+        'exclusive': False,
+        'name': 'celery',
+        'exchange': {
+            'name': 'celery',
+            'durable': True,
+            'delivery_mode': 2,
+            'passive': False,
+            'arguments': None,
+            'type': 'direct',
+            'auto_delete': False
+        },
+        'durable': True,
+        'routing_key': 'celery',
+        'no_ack': False,
+        'alias': None,
+        'queue_arguments': None,
+        'binding_arguments': None,
+        'bindings': [],
+        'auto_delete': False
+    }, {
+        'exclusive': False,
+        'name': 'foobar',
+        'exchange': {
+            'name': 'foobar',
+            'durable': True,
+            'delivery_mode': 2,
+            'passive': False,
+            'arguments': None,
+            'type': 'direct',
+            'auto_delete': False
+        },
+        'durable': True,
+        'routing_key': 'foobar',
+        'no_ack': False,
+        'alias': None,
+        'queue_arguments': None,
+        'binding_arguments': None,
+        'bindings': [],
+        'auto_delete': False
+    }]
+}
