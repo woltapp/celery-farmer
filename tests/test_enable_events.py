@@ -1,7 +1,7 @@
 import unittest
+from unittest.mock import patch
 
 from celery import Celery
-from mock import patch
 
 from farmer.enable_events import EnableEvents
 from tests.helpers.wait import wait_until_success
