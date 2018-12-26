@@ -23,14 +23,14 @@ class QueueLengths(threading.Thread):
         self.broker = RedisBroker(redis_uri=self.celery_app.broker_connection().as_uri())
 
     def stop(self):
-        logger.info("Stopping QueueLengths")
+        logger.info('Stopping QueueLengths')
         self.is_terminated = True
 
     def run(self):
-        logger.info("Running QueueLengths")
+        logger.info('Running QueueLengths')
         while not self.is_terminated:
-            logger.debug("Sending heart beat")
-            self.statsd_client.incr("heartbeats.queue_lengths")
+            logger.debug('Sending heart beat')
+            self.statsd_client.incr('heartbeats.queue_lengths')
             try:
                 queues = self._get_active_queues()
                 for queue_name in queues:
@@ -47,7 +47,7 @@ class QueueLengths(threading.Thread):
             return set()
 
         queues = [
-            [queue["name"] for queue in node]
+            [queue['name'] for queue in node]
             for node in response.values()
         ]
 
@@ -57,4 +57,4 @@ class QueueLengths(threading.Thread):
         length = self.broker.get_queue_length(queue_name)
         tags = {'queue': queue_name}
 
-        self.statsd_client.gauge("queues.length", length, tags=tags)
+        self.statsd_client.gauge('queues.length', length, tags=tags)

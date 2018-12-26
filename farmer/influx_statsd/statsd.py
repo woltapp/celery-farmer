@@ -10,9 +10,9 @@ logger = logging.getLogger(__name__)
 class InfluxDStatsDClient(object):
 
     def __init__(self, config):
-        host = config.get("host", "localhost")
-        port = config.get("port", 8125)
-        prefix = config.get("prefix", "farmer")
+        host = config.get('host', 'localhost')
+        port = config.get('port', 8125)
+        prefix = config.get('prefix', 'farmer')
 
         client = statsd.StatsClient(host, port, prefix=prefix)
         logger.info(

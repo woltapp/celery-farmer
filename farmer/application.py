@@ -32,6 +32,6 @@ class Farmer(object):
         self.event_listener_thread.start()
 
     def stop(self):
-        logger.info("Stopping farmer")
+        logger.info('Stopping farmer')
         self.enable_events_thread.stop()
         self.queue_lenghts_thread.stop()

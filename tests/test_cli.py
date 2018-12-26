@@ -13,7 +13,7 @@ class CLITestCase(unittest.TestCase):
         runner = CliRunner()
         result = runner.invoke(cli, ['start'])
         self.assertTrue(result.exit_code > 0)
-        self.assertIn("Invalid value for --broker", result.output)
+        self.assertIn('Invalid value for --broker', result.output)
 
     @patch('farmer.application.Farmer.start')
     def test_starts_farmer(self, pause_mock, start_patch):

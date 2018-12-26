@@ -18,13 +18,13 @@ class EnableEvents(threading.Thread):
         self.is_terminated = False
 
     def stop(self):
-        logger.info("Stopping EnableEvents")
+        logger.info('Stopping EnableEvents')
         self.is_terminated = True
 
     def run(self):
-        logger.info("Running EnableEvents")
+        logger.info('Running EnableEvents')
         while not self.is_terminated:
-            logger.debug("Enabling events")
+            logger.debug('Enabling events')
             try:
                 self.celery_app.control.enable_events()
             finally:

@@ -16,7 +16,7 @@ class EnableEventsTestCase(unittest.TestCase):
     def test_enabling_events(self, celery_enable_events):
         try:
             enable_events_thread = EnableEvents(
-                Celery(broker="redis://localhost"),
+                Celery(broker='redis://localhost'),
                 poll_time=0.1
             )
             enable_events_thread.start()

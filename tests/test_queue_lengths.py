@@ -16,7 +16,7 @@ class QueueLengthsTestCase(unittest.TestCase):
     def setUp(self):
         self.statsd_mock = Mock()
         self.queue_lengths = QueueLengths(
-            Celery(broker="redis://localhost"),
+            Celery(broker='redis://localhost'),
             statsd_client=self.statsd_mock,
             poll_time=0.1,
         )
@@ -35,7 +35,9 @@ class QueueLengthsTestCase(unittest.TestCase):
 
         try:
             self.queue_lengths.start()
-            wait_until_success(lambda: self.assertTrue(self.statsd_mock.incr.called))
-            self.assertEqual(self.statsd_mock.incr.call_args[0][0], "heartbeats.queue_lengths")
+            wait_until_success(
+                lambda: self.assertTrue(self.statsd_mock.incr.called))
+            self.assertEqual(self.statsd_mock.incr.call_args[0][0],
+                             'heartbeats.queue_lengths')
         finally:
             self.queue_lengths.stop()

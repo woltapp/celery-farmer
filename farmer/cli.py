@@ -17,11 +17,11 @@ def cli():
 
 
 @cli.command()
-@click.option("--broker", "-b", help="Celery app's broker url")
-@click.option("--poll-time", help="Specify polling time")
-@click.option("--statsd-host", "-sh", help="Statsd host")
-@click.option("--statsd-port", "-sp", help="Statsd port")
-@click.option("--statsd-prefix", "-spr", help="Statsd prefix")
+@click.option('--broker', '-b', help="Celery app's broker url")
+@click.option('--poll-time', help='Specify polling time')
+@click.option('--statsd-host', '-sh', help='Statsd host')
+@click.option('--statsd-port', '-sp', help='Statsd port')
+@click.option('--statsd-prefix', '-spr', help='Statsd prefix')
 def start(broker, poll_time, statsd_host, statsd_port, statsd_prefix):
     def stop_farmer(farmer, signal, frame):
         farmer.stop()
@@ -29,21 +29,22 @@ def start(broker, poll_time, statsd_host, statsd_port, statsd_prefix):
     def construct_statsd_configs(host, port, prefix):
         config = {}
         if host:
-            config["host"] = host
+            config['host'] = host
         if port:
-            config["port"] = int(port)
+            config['port'] = int(port)
         if prefix:
-            config["prefix"] = prefix
+            config['prefix'] = prefix
         return config
 
-    broker = os.environ.get("BROKER", broker)
-    poll_time = os.environ.get("POLL_TIME", poll_time)
-    statsd_host = os.environ.get("STATSD_HOST", statsd_host)
-    statsd_port = os.environ.get("STATSD_PORT", statsd_port)
-    statsd_prefix = os.environ.get("STATSD_PREFIX", statsd_prefix)
+    broker = os.environ.get('BROKER', broker)
+    poll_time = os.environ.get('POLL_TIME', poll_time)
+    statsd_host = os.environ.get('STATSD_HOST', statsd_host)
+    statsd_port = os.environ.get('STATSD_PORT', statsd_port)
+    statsd_prefix = os.environ.get('STATSD_PREFIX', statsd_prefix)
 
     if not broker:
-        raise click.BadParameter("Broker url is missing", param_hint="--broker")
+        raise click.BadParameter('Broker url is missing',
+                                 param_hint='--broker')
 
     if poll_time:
         poll_time = int(poll_time)
