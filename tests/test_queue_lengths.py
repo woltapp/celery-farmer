@@ -26,7 +26,8 @@ class QueueLengthsTestCase(unittest.TestCase):
 
         try:
             self.queue_lengths.start()
-            wait_until_success(lambda: self.assertTrue(self.statsd_mock.gauge.called))
+            wait_until_success(
+                lambda: self.assertTrue(self.statsd_mock.gauge.called))
         finally:
             self.queue_lengths.stop()
 

@@ -20,6 +20,7 @@ class EnableEventsTestCase(unittest.TestCase):
                 poll_time=0.1
             )
             enable_events_thread.start()
-            wait_until_success(lambda: self.assertTrue(celery_enable_events.called))
+            wait_until_success(
+                lambda: self.assertTrue(celery_enable_events.called))
         finally:
             enable_events_thread.stop()

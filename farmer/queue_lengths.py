@@ -20,7 +20,8 @@ class QueueLengths(threading.Thread):
 
         self.is_terminated = False
 
-        self.broker = RedisBroker(redis_uri=self.celery_app.broker_connection().as_uri())
+        self.broker = RedisBroker(
+            redis_uri=self.celery_app.broker_connection().as_uri())
 
     def stop(self):
         logger.info('Stopping QueueLengths')

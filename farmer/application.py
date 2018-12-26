@@ -7,7 +7,10 @@ from farmer.event_listener import EventListener
 from farmer.queue_lengths import QueueLengths
 from farmer.influx_statsd.statsd import InfluxDStatsDClient
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s %(levelname)s %(message)s'
+)
 
 logger = logging.getLogger(__name__)
 
@@ -20,9 +23,11 @@ class Farmer(object):
         self.statsd_client = InfluxDStatsDClient(statsd_config)
 
         self.enable_events_thread = EnableEvents(self.celery_app, poll_time)
-        self.queue_lenghts_thread = QueueLengths(self.celery_app, self.statsd_client, poll_time)
+        self.queue_lenghts_thread = QueueLengths(self.celery_app,
+                                                 self.statsd_client, poll_time)
 
-        self.event_listener_thread = EventListener(self.celery_app, self.statsd_client)
+        self.event_listener_thread = EventListener(self.celery_app,
+                                                   self.statsd_client)
 
     def start(self):
         logger.info(f'Starting Farmer with broker {self.broker_url}')

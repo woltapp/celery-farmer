@@ -52,7 +52,11 @@ def start(broker, poll_time, statsd_host, statsd_port, statsd_prefix):
         poll_time = 1 * 10
 
     from farmer.application import Farmer
-    farmer = Farmer(broker, poll_time, construct_statsd_configs(statsd_host, statsd_port, statsd_prefix))
+    farmer = Farmer(
+        broker,
+        poll_time,
+        construct_statsd_configs(statsd_host, statsd_port, statsd_prefix)
+    )
     farmer.start()
 
     signal.signal(signal.SIGINT, partial(stop_farmer, farmer))

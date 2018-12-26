@@ -8,7 +8,7 @@ def wait_until_success(function, poll_time=0.1, poll_count=10):
             function()
             success = True
             break
-        except:
+        except Exception:
             time.sleep(poll_time)
 
     if not success:

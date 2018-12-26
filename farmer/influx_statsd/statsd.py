@@ -20,7 +20,7 @@ class InfluxDStatsDClient(object):
         )
         self.client = client
 
-    def timer(self, stat, tags=None, rate=1):  # pragma: no coverage
+    def timer(self, stat, tags=None, rate=1):
         self.client.timer(self._get_stat(stat, tags), rate)
 
     def timing(self, stat, delta, tags=None, rate=1):
@@ -29,13 +29,13 @@ class InfluxDStatsDClient(object):
     def incr(self, stat, count=1, tags=None, rate=1):
         self.client.incr(self._get_stat(stat, tags), count, rate)
 
-    def decr(self, stat, count=1, tags=None, rate=1):  # pragma: no coverage
+    def decr(self, stat, count=1, tags=None, rate=1):
         self.client.decr(self._get_stat(stat, tags), count, rate)
 
-    def gauge(self, stat, value, rate=1, tags=None, delta=False):  # pragma: no coverage
+    def gauge(self, stat, value, rate=1, tags=None, delta=False):
         self.client.gauge(self._get_stat(stat, tags), value, rate, delta)
 
-    def set(self, stat, value, tags=None, rate=1):  # pragma: no coverage
+    def set(self, stat, value, tags=None, rate=1):
         self.client.set(self._get_stat(stat, tags), value, rate)
 
     def _get_stat(self, stat, tags):
