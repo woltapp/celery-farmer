@@ -13,7 +13,8 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/woltapp/farmer',
-    packages=setuptools.find_packages(),
+    packages=setuptools.find_packages(where='src'),
+    package_dir={'': 'src'},
     install_requires=[
         'statsd>=3.2.0,<4.0',
         'redis>=2.10.0,<4.0',
