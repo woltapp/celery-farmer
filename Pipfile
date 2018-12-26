@@ -14,3 +14,9 @@ farmer = {editable = true,path = "."}
 
 [requires]
 python_version = "3.7"
+
+[scripts]
+all-checks = "$SHELL -c 'flake8 && mypy src . && pytest'"
+lint = "flake8"
+test = "pytest"
+typecheck = "mypy src ."
