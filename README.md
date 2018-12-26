@@ -6,9 +6,14 @@ Farmer will monitor how the Celery cluster is behaving.
 
 ## Requirements
 
-Install requirements with pip:
+Install requirements with pipenv:
 ```
-pip install -r requirements.txt
+pipenv install
+```
+
+Install development requirements with:
+```
+pipenv install --dev
 ```
 
 ## Tests
