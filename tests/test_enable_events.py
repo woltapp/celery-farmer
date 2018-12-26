@@ -4,7 +4,7 @@ from unittest.mock import patch
 from celery import Celery
 
 from farmer.enable_events import EnableEvents
-from tests.helpers.wait import wait_until_success
+from tests.helpers import wait_until_success
 
 
 class EnableEventsTestCase(unittest.TestCase):

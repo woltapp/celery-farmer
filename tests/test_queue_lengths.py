@@ -5,7 +5,7 @@ from celery import Celery
 
 from farmer.queue_lengths import QueueLengths
 from tests import fixtures
-from tests.helpers.wait import wait_until_success
+from tests.helpers import wait_until_success
 
 
 @patch('celery.app.control.Inspect.active_queues')
