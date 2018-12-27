@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "947b0c4a6b612bd39764965d09b0c4e51e9c3306d49bf0d7daf41b8fdfc46fe2"
+            "sha256": "830f46dae25d803011af040526dd8cac23f6a0a26038e23de98e2152b5ac976e"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -34,16 +34,16 @@
             ],
             "version": "==4.2.1"
         },
+        "celery-farmer": {
+            "editable": true,
+            "path": "."
+        },
         "click": {
             "hashes": [
                 "sha256:2335065e6395b9e67ca716de5f7526736bfa6ceead690adf616d925bdc622b13",
                 "sha256:5b94b49521f6456670fdb30cd82a4eca9412788a93fa6dd6df72c94d5a8ff2d7"
             ],
             "version": "==7.0"
-        },
-        "farmer": {
-            "editable": true,
-            "path": "."
         },
         "kombu": {
             "hashes": [

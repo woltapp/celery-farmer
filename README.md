@@ -1,4 +1,4 @@
-# Farmer
+# Celery Farmer
 
 ![Image of farmer](https://www.collinsdictionary.com/images/thumb/farmer_96736501_250.jpg)
 
@@ -12,15 +12,19 @@ Farmer will monitor how the Celery cluster is behaving.
 
 ### Install
 Install package with pipenv:
-
 ```
-pipenv install .
+pipenv install celery-farmer
+```
+
+Or pip:
+```
+pip install celery-farmer
 ```
 
 ### Run
-Run farmer with shell command:
+Run celery-farmer with shell command:
 ```
-farmer
+celery-farmer
 ```
 
 ### Configuration

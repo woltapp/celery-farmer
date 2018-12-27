@@ -5,14 +5,14 @@ with open('README.md', 'r') as readme_file:
     long_description = readme_file.read()
 
 setuptools.setup(
-    name='farmer',
+    name='celery-farmer',
     version='0.1.0',
     author='Wolt Enterprises Oy',
     author_email='support@wolt.com',
     description='Farmer will monitor how the Celery cluster is behaving',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/woltapp/farmer',
+    url='https://github.com/woltapp/celery-farmer',
     packages=setuptools.find_packages(where='src'),
     package_dir={'': 'src'},
     setup_requires=[
@@ -38,6 +38,6 @@ setuptools.setup(
         'Programming Language :: Python :: Implementation :: CPython',
     ],
     entry_points=dict(
-        console_scripts='farmer = farmer.cli:cli'
+        console_scripts='celery-farmer = farmer.cli:cli'
     ),
 )
