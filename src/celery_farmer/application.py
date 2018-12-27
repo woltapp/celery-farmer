@@ -3,10 +3,10 @@ from typing import Any, Dict
 
 from celery import Celery
 
-from farmer.enable_events import EnableEvents
-from farmer.event_listener import EventListener
-from farmer.queue_lengths import QueueLengths
-from farmer.statsd import StatsClient
+from celery_farmer.enable_events import EnableEvents
+from celery_farmer.event_listener import EventListener
+from celery_farmer.queue_lengths import QueueLengths
+from celery_farmer.statsd import StatsClient
 
 logging.basicConfig(
     level=logging.INFO,

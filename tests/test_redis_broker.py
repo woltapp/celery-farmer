@@ -1,4 +1,4 @@
-from farmer.broker import RedisBroker
+from celery_farmer.broker import RedisBroker
 
 
 def test_parses_full_uri() -> None:

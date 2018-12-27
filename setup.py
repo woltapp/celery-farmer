@@ -38,6 +38,6 @@ setuptools.setup(
         'Programming Language :: Python :: Implementation :: CPython',
     ],
     entry_points=dict(
-        console_scripts='celery-farmer = farmer.cli:cli'
+        console_scripts='celery-farmer = celery_farmer.cli:cli'
     ),
 )

@@ -3,7 +3,7 @@ from unittest.mock import Mock
 from celery import Celery
 from pytest import fixture
 
-from farmer.event_listener import EventListener
+from celery_farmer.event_listener import EventListener
 from tests import fixtures
 
 

@@ -7,8 +7,8 @@ from celery import Celery
 from celery.events import EventReceiver
 from celery.events.state import State
 
-from farmer.statsd import StatsClient
-from farmer.task import get_tags
+from celery_farmer.statsd import StatsClient
+from celery_farmer.task import get_tags
 
 logger = logging.getLogger(__name__)
 

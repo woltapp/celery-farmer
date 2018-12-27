@@ -5,12 +5,12 @@ from typing import Any, Dict
 
 import click
 
-import farmer
-from farmer.application import Farmer
+import celery_farmer
+from celery_farmer.application import Farmer
 
 
 @click.group()
-@click.version_option(farmer.__version__)
+@click.version_option(celery_farmer.__version__)
 def cli() -> None:
     pass
 

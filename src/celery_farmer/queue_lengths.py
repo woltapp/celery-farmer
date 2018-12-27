@@ -6,8 +6,8 @@ from typing import Set
 
 from celery import Celery
 
-from farmer.broker import RedisBroker
-from farmer.statsd import StatsClient
+from celery_farmer.broker import RedisBroker
+from celery_farmer.statsd import StatsClient
 
 logger = logging.getLogger(__name__)
 

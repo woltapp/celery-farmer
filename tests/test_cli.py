@@ -3,7 +3,7 @@ from unittest.mock import Mock, patch
 from click.testing import CliRunner
 from pytest import fixture
 
-from farmer.cli import cli
+from celery_farmer.cli import cli
 
 
 @fixture
@@ -20,7 +20,7 @@ def test_start_gives_error_if_broker_is_missing(pause_mock: Mock,
 
 
 @patch('signal.pause')
-@patch('farmer.application.Farmer.start')
+@patch('celery_farmer.application.Farmer.start')
 def test_starts_farmer(pause_mock: Mock, start_patch: Mock,
                        _runner: CliRunner) -> None:
     result = _runner.invoke(cli, ['start', '--broker', 'redis://localhost'])

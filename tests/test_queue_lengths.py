@@ -4,7 +4,7 @@ from unittest.mock import Mock, patch
 from celery import Celery
 from pytest import fixture
 
-from farmer.queue_lengths import QueueLengths
+from celery_farmer.queue_lengths import QueueLengths
 from tests import fixtures
 from tests.helpers import wait_until_success
 
