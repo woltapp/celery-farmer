@@ -7,7 +7,7 @@ Farmer will monitor how the Celery cluster is behaving.
 ## Usage
 
 ### Requirements
-- Python, currently only Python 3.7 is supported
+- Python, versions 3.6 and 3.7 are supported
 - Pip or Pipenv
 
 ### Install
