@@ -9,6 +9,7 @@ flake8 = "*"
 pytest-cov = "*"
 mypy = "*"
 tox = "*"
+pep8-naming = "*"
 
 [packages]
 celery-farmer = {editable = true,path = "."}
