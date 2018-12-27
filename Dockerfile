@@ -1,6 +1,6 @@
 FROM python:3.7.2-stretch AS build-image
-
 RUN useradd --user-group --create-home user
+RUN pip install -U pip==18.1 pipenv==2018.11.26
 
 RUN mkdir -p /home/user/celery-farmer
 WORKDIR /home/user/celery-farmer
@@ -8,16 +8,22 @@ COPY . .
 RUN chown -R user:user .
 
 USER user
-RUN python setup.py bdist_wheel
+
+RUN pipenv install --deploy
+RUN pip wheel $(pipenv lock -r) -w dist
 
 FROM python:3.7.2-slim-stretch
+RUN useradd --user-group --create-home user
 
 WORKDIR /root
-COPY --from=build-image /home/user/celery-farmer/dist/*.whl .
-RUN pip install --no-cache-dir *.whl
-RUN rm *.whl
+COPY --from=build-image /home/user/celery-farmer/dist dist
+RUN pip install \
+    --no-cache-dir \
+    --no-index \
+    --find-links file:///root/dist/ \
+    celery-farmer
+RUN rm -rf dist
 
-RUN useradd --user-group --create-home user
 USER user
 WORKDIR /home/user
 
