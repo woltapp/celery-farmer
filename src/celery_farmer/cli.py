@@ -20,7 +20,7 @@ def cli() -> None:
               help="Celery app's broker url")
 @click.option('--poll-time', envvar='POLL_TIME', type=float, default=10,
               help='Specify polling time')
-@click.option('--statsd-host', '-sh', envvar='STASTD_HOST', help='Statsd host')
+@click.option('--statsd-host', '-sh', envvar='STATSD_HOST', help='Statsd host')
 @click.option('--statsd-port', '-sp', envvar='STATSD_PORT', type=int,
               help='Statsd port')
 @click.option('--statsd-prefix', '-spr', envvar='STATSD_PREFIX',
