@@ -1,6 +1,6 @@
 FROM python:3.8.3-stretch AS build-image
 RUN useradd --user-group --create-home user
-RUN pip install -U pip==18.1 pipenv==2018.11.26
+RUN pip install -U pip pipenv
 
 RUN mkdir -p /home/user/celery-farmer
 WORKDIR /home/user/celery-farmer
