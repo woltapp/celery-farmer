@@ -1,4 +1,4 @@
-FROM python:3.7.4-stretch AS build-image
+FROM python:3.8.3-stretch AS build-image
 RUN useradd --user-group --create-home user
 RUN pip install -U pip==18.1 pipenv==2018.11.26
 
@@ -12,7 +12,7 @@ USER user
 RUN pipenv install --deploy
 RUN pip wheel $(pipenv lock -r) -w dist
 
-FROM python:3.7.4-slim-stretch
+FROM python:3.8.3-slim-stretch
 RUN useradd --user-group --create-home user
 
 WORKDIR /root
