@@ -16,7 +16,7 @@ def test_start_gives_error_if_broker_is_missing(pause_mock: Mock,
                                                 _runner: CliRunner) -> None:
     result = _runner.invoke(cli, ['start'])
     assert result.exit_code > 0
-    assert 'Missing option "--broker" / "-b"' in result.output
+    assert 'Missing option' in result.output
 
 
 @patch('signal.pause')
