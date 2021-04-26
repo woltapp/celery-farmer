@@ -15,7 +15,7 @@ pep8-naming = "*"
 celery-farmer = {editable = true,path = "."}
 
 [scripts]
-all-checks = "$SHELL -c 'flake8 && mypy src . && pytest'"
+all-checks = "$SHELL -c 'flake8 && mypy && pytest'"
 lint = "flake8"
 test = "pytest"
-typecheck = "mypy src ."
+typecheck = "mypy"
