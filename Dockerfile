@@ -1,4 +1,4 @@
-FROM python:3.9.1-buster AS build-image
+FROM python:3.9.4-buster AS build-image
 RUN useradd --user-group --create-home user
 RUN pip install -U pip pipenv
 
@@ -12,7 +12,7 @@ USER user
 RUN pipenv install --deploy
 RUN pip wheel $(pipenv lock -r) -w dist
 
-FROM python:3.9.1-slim-buster
+FROM python:3.9.4-slim-buster
 RUN useradd --user-group --create-home user
 
 WORKDIR /root
