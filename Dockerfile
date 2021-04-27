@@ -10,7 +10,10 @@ RUN chown -R user:user .
 USER user
 
 RUN pipenv install --deploy
-RUN pip wheel $(pipenv lock -r) -w dist
+RUN REQUIREMENTS=$(mktemp) \
+    && pipenv lock -r > $REQUIREMENTS \
+    && pip wheel -r $REQUIREMENTS -w dist \
+    && rm $REQUIREMENTS
 
 FROM python:3.9.4-slim-buster
 RUN useradd --user-group --create-home user
