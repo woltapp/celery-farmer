@@ -1,4 +1,4 @@
-FROM python:3.9.4-buster AS build-image
+FROM python:3.9.5-buster AS build-image
 RUN useradd --user-group --create-home user
 RUN pip install -U pip pipenv
 
@@ -15,7 +15,7 @@ RUN REQUIREMENTS=$(mktemp) \
     && pip wheel -r $REQUIREMENTS -w dist \
     && rm $REQUIREMENTS
 
-FROM python:3.9.4-slim-buster
+FROM python:3.9.5-slim-buster
 RUN useradd --user-group --create-home user
 
 WORKDIR /root
