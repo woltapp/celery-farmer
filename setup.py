@@ -25,8 +25,8 @@ setuptools.setup(
     install_requires=[
         'statsd>=3.2.0,<4.0',
         'redis>=2.10.0,<4.0',
-        'celery>=4.0,<5.0',
-        'click>=6.7,<8.0',
+        'celery>=4.0,<6.0',
+        'click>=6.7,<9.0',
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',

@@ -10,6 +10,7 @@ pytest-cov = "*"
 mypy = "*"
 tox = "*"
 pep8-naming = "*"
+types-redis = "*"
 
 [packages]
 celery-farmer = {editable = true,path = "."}
