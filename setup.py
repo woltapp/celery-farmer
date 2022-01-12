@@ -6,7 +6,7 @@ with open('README.md', 'r') as readme_file:
 
 setuptools.setup(
     name='celery-farmer',
-    version='0.1.3',
+    version='0.2.0',
     author='Wolt Enterprises Oy',
     author_email='support@wolt.com',
     description='Farmer will monitor how the Celery cluster is behaving',
@@ -33,7 +33,6 @@ setuptools.setup(
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
