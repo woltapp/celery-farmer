@@ -6,7 +6,7 @@ with open('README.md', 'r') as readme_file:
 
 setuptools.setup(
     name='celery-farmer',
-    version='0.2.0',
+    version='0.2.1',
     author='Wolt Enterprises Oy',
     author_email='support@wolt.com',
     description='Farmer will monitor how the Celery cluster is behaving',
