@@ -1,4 +1,5 @@
 import logging
+import os
 from typing import Any, Dict
 
 from celery import Celery
@@ -21,6 +22,9 @@ class Farmer:
                  statsd_config: Dict[str, Any]) -> None:
         self.broker_url = broker_url
         self.celery_app = Celery(broker=self.broker_url)
+        config_module = os.environ.get("FARMER_CELERY_CONFIG")
+        if config_module:
+            self.celery_app.config_from_object(config_module)
 
         self.statsd_client = StatsClient(statsd_config)
 
