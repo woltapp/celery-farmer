@@ -1,3 +1,4 @@
+import os
 from itertools import chain
 import logging
 import threading
@@ -21,6 +22,7 @@ class QueueLengths(threading.Thread):
         self.statsd_client = statsd_client
         self.poll_time = poll_time
 
+        self.monitor_queues = set(os.environ.get("FARMER_MONITOR_QUEUES", "").split())
         self.is_terminated = False
 
         self.broker = RedisBroker(
@@ -36,7 +38,7 @@ class QueueLengths(threading.Thread):
             logger.debug('Sending heart beat')
             self.statsd_client.incr('heartbeats.queue_lengths')
             try:
-                queues = self._get_active_queues()
+                queues = self.monitor_queues or self._get_active_queues()
                 for queue_name in queues:
                     self._track_queue_length(queue_name)
             except Exception as e:
