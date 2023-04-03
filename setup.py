@@ -6,7 +6,7 @@ with open('README.md', 'r') as readme_file:
 
 setuptools.setup(
     name='celery-farmer',
-    version='0.2.1',
+    version='0.2.2',
     author='Wolt Enterprises Oy',
     author_email='support@wolt.com',
     description='Farmer will monitor how the Celery cluster is behaving',
@@ -23,8 +23,8 @@ setuptools.setup(
         'pytest-cov',
     ],
     install_requires=[
-        'statsd>=3.2.0,<4.0',
-        'redis>=2.10.0,<4.0',
+        'statsd>=3.2.0,<5.0',
+        'redis>=2.10.0,<5.0',
         'celery>=4.0,<6.0',
         'click>=6.7,<9.0',
     ],
